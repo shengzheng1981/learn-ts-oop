@@ -6,11 +6,16 @@ import {Element} from "./element";
 export class ConfigElement extends Element{
 
     @Serialize()
+    public _id: string = "";
+
+    @Serialize()
     public code: string = "";
 
     @Serialize()
     public title: string = "";
 
+    @Serialize("desc")
+    public description: string = "";
 
     constructor() {
         super();
@@ -21,6 +26,12 @@ export class ConfigElement extends Element{
         return this.title || '未命名';
     }
 
+    create() {
+        const timestamp = (new Date().getTime() / 1000 | 0).toString(16);
+        this._id = timestamp + 'xxxxxxxxxxxxxxxx'.replace(/[x]/g, function() {
+            return (Math.random() * 16 | 0).toString(16);
+        }).toLowerCase();
+    }
 
 }
 

@@ -1,0 +1,31 @@
+.chapter-body {
+    display: grid;
+    grid-gap: 10px;
+    grid-template-columns: 1fr 1fr;
+}
+
+.active-row {
+    background-color: #e6f7ff;
+}
+
+.editor-body {
+    display: grid;
+    grid-gap: 15px;
+    grid-auto-flow: row;
+    grid-auto-rows: min-content;
+    grid-template-columns: 1fr 1fr;
+    padding: 15px;
+}
+
+.attribute-item {
+    display: grid;
+    grid-template-columns: auto 1fr;
+    justify-items: start;
+    align-items: center;
+    min-height: 34px;
+    .name {
+        width: 120px;
+        text-align: left;
+        color: #969696;
+    }
+  }
