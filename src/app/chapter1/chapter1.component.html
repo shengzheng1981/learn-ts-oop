@@ -26,13 +26,13 @@
                     </tr>
                     </thead>
                     <tbody class="table-body">
-                    <tr class="table-row-hover" *ngFor="let item of dataTable.data; let i = index" [ngClass]="{'active-row': current && item.code === current.code}" (click)="active(item)">
+                    <tr class="table-row-hover" *ngFor="let item of dataTable.data; let i = index" [ngClass]="{'active-row': current && item._id === current._id}" (click)="active(item)">
                         <td class="text-center table-item">{{(dataTable.nzPageIndex - 1) * dataTable.nzPageSize + i + 1}}</td>
                         <td class="text-center table-item">{{item.code}}</td>
                         <td class="text-center table-item">{{item.title}}</td>
                         <td>
                             <div class="actions">
-                                <button class="btn btn-xs btn-default" nz-tooltip nzTitle="删除" (click)="remove(item)"> 
+                                <button nz-button nz-tooltip nzTitle="删除" (click)="remove(item)"> 
                                     <i class="far fa-trash-alt"></i>
                                 </button>
                             </div>

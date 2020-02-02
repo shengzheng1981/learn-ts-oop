@@ -1,30 +1,40 @@
 import { Component, OnInit } from '@angular/core';
-import { FacilityCategory } from './element/facility-category';
+import { Facility } from './element/facility';
 import { NzMessageService, NzModalService } from "ng-zorro-antd";
+import { Meta } from './element/meta';
 
 @Component({
-  selector: 'app-chapter1',
-  templateUrl: './chapter1.component.html',
-  styleUrls: ['./chapter1.component.scss']
+  selector: 'app-chapter2',
+  templateUrl: './chapter2.component.html',
+  styleUrls: ['./chapter2.component.scss']
 })
-export class Chapter1Component implements OnInit {
-  
-  static DB_Name: string = "chapter1-config";
-  static DB_Table_Name: string = "FacilityCategory";
+export class Chapter2Component implements OnInit {
+
+  static DB_Name: string = "chapter2-data";
+  static DB_Table_Name: string = "Facility";
   static DB_Version: number = 1;
   static DB_Default_Data = [
-      {code: "A1", title: "A类设施"},
-      {code: "B1", title: "B类设施"},
-      {code: "C1", title: "C类设施"}
+      {name: "泵站", code: "P-001", complete: "2020-01-01"},
+      {name: "调蓄池", code: "S-001", complete: "2020-02-01"},
+      {name: "防洪坝", code: "W-001", complete: "2020-02-02"}
   ];
   DB: any = null;
-  categories: any = [];
-  current: FacilityCategory;
+  facilities: any = [];
+  current: Facility;
+
+  properties: Array<Meta>;
 
   constructor(private modal: NzModalService, private message: NzMessageService) { }
 
   async ngOnInit() {
-    let request = window.indexedDB.open(Chapter1Component.DB_Name, Chapter1Component.DB_Version);
+    this.properties = new Array<Meta>();
+    const instance = new Facility();
+    Object.keys(instance).forEach( property => {
+        const meta = new Meta();
+        meta.init(instance, property);
+        this.properties.push(meta);
+    });
+    let request = window.indexedDB.open(Chapter2Component.DB_Name, Chapter2Component.DB_Version);
     request.onerror = (event) => {
         //console.log('Database failed to open');
     };
@@ -33,18 +43,18 @@ export class Chapter1Component implements OnInit {
         //console.log('Database opened successfully');
         // Store the opened database object in the db variable. This is used a lot below
         this.DB = request.result;
-        const objectStore = this.DB.transaction(Chapter1Component.DB_Table_Name).objectStore(Chapter1Component.DB_Table_Name);
+        const objectStore = this.DB.transaction(Chapter2Component.DB_Table_Name).objectStore(Chapter2Component.DB_Table_Name);
         const req = objectStore.getAll();
         req.onsuccess = (event) => {
             const data = (event.target as any).result;
             //加载IndexedDB存储的原有记录
-            this.categories = [];
+            this.facilities = [];
             Array.isArray(data) && data.forEach(item => {
-                const category = new FacilityCategory();
-                category.fromJSON(item);
-                this.categories.push(category);
+                const facility = new Facility();
+                facility.fromJSON(item);
+                this.facilities.push(facility);
             });
-            this.categories.length > 0 && (this.current = this.categories[0]);
+            this.facilities.length > 0 && (this.current = this.facilities[0]);
         }
     };
     //IndexedDB初始化及升级
@@ -53,15 +63,15 @@ export class Chapter1Component implements OnInit {
         const db = (event.target as any).result;
         // Create an objectStore to store our notes in (basically like a single table)
         // including a auto-incrementing key
-        const objectStore = db.createObjectStore(Chapter1Component.DB_Table_Name, { keyPath: "_id" });
+        const objectStore = db.createObjectStore(Chapter2Component.DB_Table_Name, { keyPath: "_id" });
         objectStore.transaction.oncomplete = (event) => {
             //初始化默认数据，并将数据保存到新创建的对象仓库
-            const objectStore = db.transaction(Chapter1Component.DB_Table_Name, "readwrite").objectStore(Chapter1Component.DB_Table_Name);
-            Chapter1Component.DB_Default_Data.forEach( (item) => {
-                const category = new FacilityCategory();
-                category.fromJSON(item);
-                category.create();
-                objectStore.add(category.toJSON());
+            const objectStore = db.transaction(Chapter2Component.DB_Table_Name, "readwrite").objectStore(Chapter2Component.DB_Table_Name);
+            Chapter2Component.DB_Default_Data.forEach( (item) => {
+                const facility = new Facility();
+                facility.fromJSON(item);
+                facility.create();
+                objectStore.add(facility.toJSON());
             });
         };
     };
@@ -72,11 +82,11 @@ export class Chapter1Component implements OnInit {
   }
 
   add(){
-    this.current = new FacilityCategory();
+    this.current = new Facility();
     this.current.create();
-    this.categories.push(this.current);
-    this.categories = [...this.categories];
-    const objectStore = this.DB.transaction(Chapter1Component.DB_Table_Name, "readwrite").objectStore(Chapter1Component.DB_Table_Name);
+    this.facilities.push(this.current);
+    this.facilities = [...this.facilities];
+    const objectStore = this.DB.transaction(Chapter2Component.DB_Table_Name, "readwrite").objectStore(Chapter2Component.DB_Table_Name);
     objectStore.add(this.current.toJSON());
     this.message.create("success", "添加成功!");
   }
@@ -88,16 +98,16 @@ export class Chapter1Component implements OnInit {
       nzOkText: '确定',
       nzCancelText: '取消',
       nzOnOk: () => {
-        const objectStore = this.DB.transaction(Chapter1Component.DB_Table_Name, "readwrite").objectStore(Chapter1Component.DB_Table_Name);
+        const objectStore = this.DB.transaction(Chapter2Component.DB_Table_Name, "readwrite").objectStore(Chapter2Component.DB_Table_Name);
         const request = objectStore.delete(item._id);
         request.onerror = (event) => {
           // 错误处理
           this.message.create("warning", "删除失败!");
         };
         request.onsuccess = (event) => {
-          const index = this.categories.findIndex(category => category._id === item._id);
-          this.categories.splice(index, 1);
-          this.categories = [...this.categories];
+          const index = this.facilities.findIndex(facility => facility._id === item._id);
+          this.facilities.splice(index, 1);
+          this.facilities = [...this.facilities];
           if (item._id === this.current._id) this.current = null;
           this.message.create("success", "删除成功!");
         };
@@ -106,7 +116,7 @@ export class Chapter1Component implements OnInit {
   }
 
   save(){
-    const objectStore = this.DB.transaction(Chapter1Component.DB_Table_Name, "readwrite").objectStore(Chapter1Component.DB_Table_Name);
+    const objectStore = this.DB.transaction(Chapter2Component.DB_Table_Name, "readwrite").objectStore(Chapter2Component.DB_Table_Name);
     const request = objectStore.get(this.current._id);
     request.onerror = (event) => {
       // 错误处理
@@ -125,4 +135,5 @@ export class Chapter1Component implements OnInit {
       };
     };
   }
+
 }
