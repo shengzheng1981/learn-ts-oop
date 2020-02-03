@@ -16,6 +16,11 @@ export class AppComponent {
     "text": "Chapter2",
     "link": "/chapter2",
     "icon": "fas fa-dice-two fa-lg"
+  },
+  {
+    "text": "Chapter3",
+    "link": "/chapter3",
+    "icon": "fas fa-dice-three fa-lg"
   }];
   constructor(){
     document.title = this.title;

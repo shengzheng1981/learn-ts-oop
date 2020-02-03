@@ -1,0 +1,81 @@
+<div class="chapter-body">
+    <div class="panel panel-grid">
+        <div class="panel-heading">
+            <div class="panel-title">
+                <span>列表</span>
+            </div>
+        </div>
+        <div class="panel-body">
+            <nz-table #dataTable [nzFrontPagination]="true"
+                [nzData]="facilities" [nzShowPagination]="true" [nzPageSize]="10">
+                <thead>
+                <tr class="table-header">
+                    <th class="text-center" style="width: 80px;">#</th>
+                    <ng-container *ngFor="let meta of properties">
+                        <th class="text-center" *ngIf="meta.column">{{meta.alias}}</th>
+                    </ng-container>
+                    <th class="text-center" style="width: 80px;">操作</th>
+                </tr>
+                </thead>
+                <tbody class="table-body">
+                <tr class="table-row-hover" *ngFor="let item of dataTable.data; let i = index" [ngClass]="{'active-row': current && item._id === current._id}" (click)="active(item)">
+                    <td class="text-center table-item">{{(dataTable.nzPageIndex - 1) * dataTable.nzPageSize + i + 1}}</td>
+                    <ng-container *ngFor="let meta of properties">
+                        <td class="text-center table-item" *ngIf="meta.column">{{item[meta.key]}}</td>
+                    </ng-container>
+                    <td>
+                        <div class="actions">
+                            <button nz-button nz-tooltip nzTitle="删除" (click)="remove(item)"> 
+                                <i class="far fa-trash-alt"></i>
+                            </button>
+                        </div>
+                    </td>
+                </tr>
+                </tbody>
+            </nz-table>
+        </div>
+        <div class="panel-footer">
+            <button nz-button nzType="primary" (click)="add()">添加</button>
+        </div>
+    </div>
+    <div class="panel panel-grid">
+        <div class="panel-heading">
+            <div class="panel-title">
+                <span>要素</span>
+            </div>
+        </div>
+        <div class="panel-body">
+            <div class="editor-body" *ngIf="current">
+                <ng-container *ngFor="let meta of properties">
+                    <div class="attribute-item" *ngIf="meta.editor == 'String'">
+                        <div class="name">{{meta.alias}}：</div>
+                        <input class="form-control" [name]="meta.key" [(ngModel)]="current[meta.key]"  autocomplete="off">
+                    </div>
+                    <div class="attribute-item" *ngIf="meta.editor == 'Number'">
+                        <div class="name">{{meta.alias}}：</div>
+                        <input class="form-control" type="number" [name]="meta.key" [(ngModel)]="current[meta.key]"  autocomplete="off">
+                    </div>
+                    <div class="attribute-item" *ngIf="meta.editor == 'Date'">
+                        <div class="name">{{meta.alias}}：</div>
+                        <nz-date-picker class="form-control" [nzFormat]="'yyyy/MM/dd'" [name]="meta.key" [(ngModel)]="current[meta.key]" ></nz-date-picker>
+                    </div>
+                    <div class="attribute-item" *ngIf="meta.editor == 'Boolean'">
+                        <div class="name">{{meta.alias}}：</div>
+                        <nz-select style="width:100%;" [name]="meta.key" [(ngModel)]="current[meta.key]" >
+                            <nz-option [nzLabel]="'true'" [nzValue]="true"></nz-option>
+                            <nz-option [nzLabel]="'false'" [nzValue]="false"></nz-option>
+                        </nz-select>
+                    </div>
+                    <div class="attribute-item" *ngIf="meta.editor == 'Memo'" style="grid-column: 1 / span 2; display: grid; grid-template-rows: auto 1fr; grid-gap: 0px;">
+                        <div class="name">{{meta.alias}}：</div>
+                        <textarea class="form-control" [name]="meta.key" [(ngModel)]="current[meta.key]"  rows="3"></textarea>
+                    </div>
+                </ng-container>
+            </div>
+            <nz-empty *ngIf="!current"></nz-empty>
+        </div>
+        <div class="panel-footer">
+            <button nz-button nzType="primary" (click)="save()" [disabled]="!current">保存</button>
+        </div>
+    </div>
+</div>

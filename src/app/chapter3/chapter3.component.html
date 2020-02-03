@@ -1,0 +1,23 @@
+<div class="module-content">
+    <div class="module-header">
+        <div class="module-header-title">
+            <i class="fas fa-dice-three fa-lg"></i>第三章
+        </div>
+        <div class="module-header-desc">
+            <span>多个要素类的编辑与管理</span>
+        </div>
+        <div class="module-header-tabs">
+            <ul class="router-tabs">
+                <li role="presentation" [routerLinkActive]="['active']">
+                    <a [routerLink]="['data']">数据</a>
+                </li>
+                <li role="presentation" [routerLinkActive]="['active']">
+                    <a [routerLink]="['config']">配置</a>
+                </li>
+            </ul>
+        </div>
+    </div>
+    <div class="module-body">
+        <router-outlet></router-outlet>
+    </div>
+</div>

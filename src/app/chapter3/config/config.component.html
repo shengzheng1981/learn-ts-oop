@@ -1,0 +1,66 @@
+<div class="chapter-body">
+    <div class="panel panel-grid">
+        <div class="panel-heading">
+            <div class="panel-title">
+                <span>列表</span>
+            </div>
+        </div>
+        <div class="panel-body">
+            <nz-table #dataTable [nzFrontPagination]="true"
+                [nzData]="categories" [nzShowPagination]="true" [nzPageSize]="10">
+                <thead>
+                <tr class="table-header">
+                    <th class="text-center" style="width: 80px;">#</th>
+                    <th class="text-center" style="width: auto;">编码</th>
+                    <th class="text-center" style="width: auto;">标题</th>
+                    <th class="text-center" style="width: 80px;">操作</th>
+                </tr>
+                </thead>
+                <tbody class="table-body">
+                <tr class="table-row-hover" *ngFor="let item of dataTable.data; let i = index" [ngClass]="{'active-row': current && item._id === current._id}" (click)="active(item)">
+                    <td class="text-center table-item">{{(dataTable.nzPageIndex - 1) * dataTable.nzPageSize + i + 1}}</td>
+                    <td class="text-center table-item">{{item.code}}</td>
+                    <td class="text-center table-item">{{item.title}}</td>
+                    <td>
+                        <div class="actions">
+                            <button nz-button nz-tooltip nzTitle="删除" (click)="remove(item)"> 
+                                <i class="far fa-trash-alt"></i>
+                            </button>
+                        </div>
+                    </td>
+                </tr>
+                </tbody>
+            </nz-table>
+        </div>
+        <div class="panel-footer">
+            <button nz-button nzType="primary" (click)="add()">添加</button>
+        </div>
+    </div>
+    <div class="panel panel-grid">
+        <div class="panel-heading">
+            <div class="panel-title">
+                <span>要素</span>
+            </div>
+        </div>
+        <div class="panel-body">
+            <div class="editor-body" *ngIf="current">
+                <div class="attribute-item">
+                    <div class="name">编码：</div>
+                    <input class="form-control" name="code" [(ngModel)]="current.code"  autocomplete="off">
+                </div>
+                <div class="attribute-item">
+                    <div class="name">标题：</div>
+                    <input class="form-control" name="title" [(ngModel)]="current.title"  autocomplete="off">
+                </div>
+                <div class="attribute-item" style="grid-column: 1 / span 2; display: grid; grid-template-rows: auto 1fr; grid-gap: 0px;">
+                    <div class="name">描述：</div>
+                    <textarea class="form-control" name="description" [(ngModel)]="current.description"  rows="3"></textarea>
+                </div>
+            </div>
+            <nz-empty *ngIf="!current"></nz-empty>
+        </div>
+        <div class="panel-footer">
+            <button nz-button nzType="primary" (click)="save()" [disabled]="!current">保存</button>
+        </div>
+    </div>
+</div>
