@@ -3,7 +3,7 @@ import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { IndexedAdapter } from './indexed-adapter';
 
-@Injectable({ providedIn: 'root' })
+@Injectable()
 export class IndexedResolver implements Resolve<any> {
   constructor() {}
 

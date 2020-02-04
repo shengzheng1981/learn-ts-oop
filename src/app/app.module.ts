@@ -7,6 +7,7 @@ import { HttpClientModule } from '@angular/common/http';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { NgZorroAntdModule, NZ_I18N, zh_CN } from 'ng-zorro-antd';
+import {LoadingBarHttpClientModule} from '@ngx-loading-bar/http-client';
 
 /** 配置 angular i18n **/
 import { registerLocaleData } from '@angular/common';
@@ -24,7 +25,8 @@ registerLocaleData(zh);
     BrowserAnimationsModule,
     AppRoutingModule,
     /** 导入 ng-zorro-antd 模块 **/
-    NgZorroAntdModule
+    NgZorroAntdModule,
+    LoadingBarHttpClientModule
   ],
   bootstrap: [ AppComponent ],
   /** 配置 ng-zorro-antd 国际化（文案 及 日期） **/

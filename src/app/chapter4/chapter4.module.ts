@@ -3,18 +3,16 @@ import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { RouterModule, Routes } from "@angular/router";
 import { NgZorroAntdModule, NZ_I18N, zh_CN } from 'ng-zorro-antd';
-import { Chapter3Component } from './chapter3.component';
+import { Chapter4Component } from './chapter4.component';
 import { DataComponent } from './data/data.component';
 import { ConfigComponent } from './config/config.component';
-import { IndexedResolver } from './indexed-resolver';
+import { FacilityService } from './service/facility.service';
+import { CategoryService } from './service/category.service';
 
 const routes: Routes = [
   {
       path: '',
-      component: Chapter3Component,
-      resolve: {
-        db: IndexedResolver
-      },
+      component: Chapter4Component,
       children: [
           {
               path: 'data',
@@ -36,7 +34,7 @@ const routes: Routes = [
 ];
 
 @NgModule({
-  declarations: [Chapter3Component, DataComponent, ConfigComponent],
+  declarations: [Chapter4Component, DataComponent, ConfigComponent],
   imports: [
     CommonModule,
     FormsModule,
@@ -44,7 +42,7 @@ const routes: Routes = [
     NgZorroAntdModule
   ],
   providers: [
-    { provide: NZ_I18N, useValue: zh_CN }, IndexedResolver
+    { provide: NZ_I18N, useValue: zh_CN }, FacilityService, CategoryService
   ]
 })
-export class Chapter3Module { }
+export class Chapter4Module { }

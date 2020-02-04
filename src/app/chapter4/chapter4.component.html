@@ -1,0 +1,24 @@
+<div class="module-content">
+        <div class="module-header">
+            <div class="module-header-title">
+                <i class="fas fa-dice-four fa-lg"></i>第四章
+            </div>
+            <div class="module-header-desc">
+                <span>MongoDB存储数据的序列化与反序列化</span>
+            </div>
+            <div class="module-header-tabs">
+                <ul class="router-tabs">
+                    <li role="presentation" [routerLinkActive]="['active']">
+                        <a [routerLink]="['data']">数据</a>
+                    </li>
+                    <li role="presentation" [routerLinkActive]="['active']">
+                        <a [routerLink]="['config']">配置</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+        <div class="module-body">
+            <router-outlet></router-outlet>
+        </div>
+    </div>
+    
