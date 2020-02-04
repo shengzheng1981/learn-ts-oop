@@ -1,0 +1,198 @@
+@import "./theme.scss";
+
+html,
+body {
+  overflow: hidden !important;
+  height: 100%;
+  padding: 0 !important; //ng drawer 6px
+  margin: 0 !important; //
+}
+a {
+  text-decoration: none;
+}
+a:active,
+a:hover {
+  outline: 0;
+  text-decoration: none;
+}
+ul {
+  margin: 0;
+  padding: 0;
+}
+li {
+  list-style-type: none;
+}
+.btn:focus,
+.btn.focus,
+.btn:active:focus,
+.btn:active.focus,
+.btn.active:focus,
+.btn.active.focus {
+  outline: none;
+}
+
+/* start  module */
+
+//二级或三级菜单内容：上中下布局（标题/内容/操作）
+.module-content {
+  position: relative;
+  height: 100%;
+  display: grid;
+  grid-template-rows: auto 1fr auto;
+  background: #eee;
+}
+
+//头部：左右布局（标题/四级菜单栏）
+.module-content .module-header {
+  height: 50px;
+  margin: 0;
+  padding: 0px 15px;
+  position: relative;
+  background: #fdfdfd;
+  display: grid;
+  grid-gap: 10px;
+  grid-template-columns: auto 1fr auto;
+  align-items: center;
+}
+.module-content .module-body {
+  position: relative;
+  overflow-x: hidden;
+  overflow-y: hidden;
+  padding: 0 10px;
+  margin: 10px 0;
+  background: #eee;
+}
+.module-content .module-footer {
+  height: 50px;
+  background: #fdfdfd;
+  padding: 0px 20px;
+  display: grid;
+  grid-gap: 10px;
+  /* autoprefixer: off */
+  grid-auto-flow: column;
+  grid-template-columns: min-content;
+  align-items: center;
+  justify-content: right;
+}
+
+.module-content .module-header .module-header-title {
+  font-size: 16px;
+  color: #333;
+}
+.module-content .module-header .module-header-title i {
+  margin-right: 10px;
+  font-size: 20px;
+}
+.module-content .module-header .module-header-desc {
+  font-size: 12px;
+}
+.module-content .module-header .module-header-tabs {
+  align-self: flex-end;
+}
+
+/* end  module */
+
+/* start  panel */
+//panel布局：上中下（header/body/footer）
+.panel-grid {
+  display: grid;
+  grid-template-rows: auto 1fr auto;
+  overflow: hidden;
+}
+
+.panel-grid .panel-body {
+  overflow: auto;
+}
+
+.panel {
+  margin-bottom: 0px;
+  background: #fdfdfd;
+  box-shadow: 0 1px 1px rgba(0, 0, 0, 0.05);
+}
+.panel .panel-heading {
+  display: flex;
+  padding: 10px 15px;
+  background: #f5f5f5;
+  align-items: center;
+  .panel-title {
+    flex: 1 0 0;
+    padding-left: 10px;
+    color: #333;
+    font-size: 14px;
+    border-left: solid 3px $color-primary;
+  }
+
+  .panel-close {
+    font-size: 14px;
+    cursor: pointer;
+  }
+
+  .panel-close:hover {
+    opacity: 0.5;
+    cursor: pointer;
+  }
+}
+
+.panel .panel-footer {
+  text-align: right;
+  padding: 10px 15px;
+  background: #f5f5f5;
+}
+
+.panel .panel-body {
+  padding: 15px;
+  display: grid;
+}
+.panel .panel-body:before {
+  display: none !important;
+}
+.panel .panel-body:after {
+  display: none !important;
+}
+
+/* end  panel */
+
+/* start router */
+.router-tabs {
+  padding: 0px 10px;
+  font-size: 14px;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+  background: #fdfdfd;
+}
+.router-tabs > li {
+  display: inline-block;
+  margin-right: 2px;
+}
+.router-tabs > li > a {
+  display: block;
+  border-radius: 0px;
+  min-width: 80px;
+  text-align: center;
+  padding: 10px 15px;
+  color: #333;
+  cursor: pointer;
+  outline: none;
+  text-decoration: none;
+}
+.router-tabs > li.active > a {
+  border-bottom: solid 2px $color-primary;
+}
+.router-tabs > li.active > a,
+.router-tabs > li.active > a:focus,
+.router-tabs > li.active > a:hover {
+  color: $color-primary;
+}
+.router-tabs > li > a:focus,
+.router-tabs > li > a:hover {
+  border-bottom: solid 2px $color-primary;
+}
+/* end router */
+
+/* ng-zorro */
+.ant-calendar-picker {
+  width: 100%;
+}
+/* ng-zorro */
