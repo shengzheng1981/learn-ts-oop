@@ -4,6 +4,9 @@ import "reflect-metadata";
 //基类
 export class Element {
  
+    static getClassName(): string {
+        return "Element";
+    }
 
     constructor() {
     }

@@ -61,7 +61,7 @@ export class IndexedAdapter {
 
     static get(type){
         return new Promise( (resolve, reject) => {
-            const objectStore = IndexedAdapter.DB.transaction(type.name, "readwrite").objectStore(type.name);
+            const objectStore = IndexedAdapter.DB.transaction(type.getClassName(), "readwrite").objectStore(type.getClassName());
             const request = objectStore.getAll();
             request.onerror = (event) => {
                 // 错误处理
@@ -84,7 +84,7 @@ export class IndexedAdapter {
 
     static create(instance){
         return new Promise( (resolve, reject) => {
-            const objectStore = IndexedAdapter.DB.transaction(instance.constructor.name, "readwrite").objectStore(instance.constructor.name);
+            const objectStore = IndexedAdapter.DB.transaction(instance.constructor.getClassName(), "readwrite").objectStore(instance.constructor.getClassName());
             const request = objectStore.add(instance.toJSON());
             request.onerror = (event) => {
                 // 错误处理
@@ -99,7 +99,7 @@ export class IndexedAdapter {
 
     static delete(instance){
         return new Promise( (resolve, reject) => {
-            const objectStore = IndexedAdapter.DB.transaction(instance.constructor.name, "readwrite").objectStore(instance.constructor.name);
+            const objectStore = IndexedAdapter.DB.transaction(instance.constructor.getClassName(), "readwrite").objectStore(instance.constructor.getClassName());
             const request = objectStore.delete(instance._id);
             request.onerror = (event) => {
                 // 错误处理
@@ -114,7 +114,7 @@ export class IndexedAdapter {
 
     static update(instance){
         return new Promise( (resolve, reject) => {
-            const objectStore = IndexedAdapter.DB.transaction(instance.constructor.name, "readwrite").objectStore(instance.constructor.name);
+            const objectStore = IndexedAdapter.DB.transaction(instance.constructor.getClassName(), "readwrite").objectStore(instance.constructor.getClassName());
             const request = objectStore.get(instance._id);
             request.onerror = (event) => {
                 // 错误处理

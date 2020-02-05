@@ -6,6 +6,10 @@ import {EntityElement} from "./entity-element";
 //设施
 export class Facility extends EntityElement{
 
+    static getClassName(): string {
+        return "Facility";
+    }
+
     @Alias("地址")
     @Editor("String")
     @Serialize()
