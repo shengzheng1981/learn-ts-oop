@@ -7,8 +7,8 @@ const routes: Routes = [
     path: '',
     children: [
         {
-            path: 'chapter1',
-            loadChildren: './chapter1/chapter1.module#Chapter1Module'
+          path: 'chapter1',
+          loadChildren: './chapter1/chapter1.module#Chapter1Module'
         },
         {
           path: 'chapter2',
@@ -21,6 +21,10 @@ const routes: Routes = [
         {
           path: 'chapter4',
           loadChildren: './chapter4/chapter4.module#Chapter4Module'
+        },
+        {
+          path: 'chapter5',
+          loadChildren: './chapter5/chapter5.module#Chapter5Module'
         },
         {
           path: '**',
