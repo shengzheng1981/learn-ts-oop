@@ -1,0 +1,23 @@
+<div class="editor-container">
+
+    <div class="item">
+        <button class="btn btn-sm btn-primary" (click)="startPoint()" >
+            <i class="fas fa-map-pin" style="width: 12px" nz-tooltip nzTitle="画点"></i>
+        </button>
+    </div>
+    <div class="item">
+        <button class="btn btn-sm btn-primary" (click)="startPolyline()" >
+            <i class="fas fa-minus" style="width: 12px" nz-tooltip nzTitle="画线"></i>
+        </button>
+    </div>
+    <div class="item">
+        <button class="btn btn-sm btn-primary" (click)="startPolygon()" >
+            <i class="fas fa-square" style="width: 12px" nz-tooltip nzTitle="画面"></i>
+        </button>
+    </div>
+    <div class="item">
+        <button class="btn btn-sm btn-danger" (click)="removeSelection()">
+            <i class="fas fa-times" style="width: 12px" nz-tooltip nzTitle="删除"></i>
+        </button>
+    </div>
+</div>

@@ -1,3 +1,6 @@
-<div #map style="height:100%;">
+<div #mapContainer style="height:100%; z-index: 1;">
 
+</div>
+<div class="draw-toolbar">
+    <app-lmap-editor #lmapEditor [editable]="true" [map]="map" ></app-lmap-editor>
 </div>

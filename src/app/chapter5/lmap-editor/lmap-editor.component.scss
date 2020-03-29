@@ -1,0 +1,7 @@
+.editor-container{
+  display: grid;
+  grid-gap: 10px;
+  grid-auto-flow: column;
+  /* autoprefixer: off;*/
+  grid-auto-columns: min-content;
+}

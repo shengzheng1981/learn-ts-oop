@@ -9,6 +9,8 @@ import { MapComponent } from './map/map.component';
 import { FacilityService } from './service/facility.service';
 import { CategoryService } from './service/category.service';
 
+import { LmapEditorComponent } from './lmap-editor/lmap-editor.component';
+
 const routes: Routes = [
   {
       path: '',
@@ -18,7 +20,7 @@ const routes: Routes = [
 
 
 @NgModule({
-  declarations: [Chapter5Component, MapComponent],
+  declarations: [Chapter5Component, MapComponent, LmapEditorComponent],
   imports: [
     CommonModule,
     FormsModule,
