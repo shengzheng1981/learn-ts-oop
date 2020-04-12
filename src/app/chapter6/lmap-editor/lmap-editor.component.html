@@ -1,0 +1,34 @@
+<div class="editor-container">
+    <div class="item">
+        <button class="btn btn-sm btn-primary" (click)="select()" [ngClass]="{'btn-primary-active': currentTool == 'Select'}">
+            <i class="fas fa-mouse-pointer" style="width: 12px" nz-tooltip nzTitle="选择"></i>
+        </button>
+    </div>
+    <div class="item">
+        <button class="btn btn-sm btn-primary" (click)="startMarker()" [ngClass]="{'btn-primary-active': currentTool == 'Marker'}">
+            <i class="fas fa-map-pin" style="width: 12px" nz-tooltip nzTitle="画点"></i>
+        </button>
+    </div>
+    <div class="item">
+        <button class="btn btn-sm btn-primary" (click)="startPolyline()" [ngClass]="{'btn-primary-active': currentTool == 'Polyline'}">
+            <i class="fas fa-minus" style="width: 12px" nz-tooltip nzTitle="画线"></i>
+        </button>
+    </div>
+    <div class="item">
+        <button class="btn btn-sm btn-primary" (click)="startPolygon()" [ngClass]="{'btn-primary-active': currentTool == 'Polygon'}">
+            <i class="fas fa-square" style="width: 12px" nz-tooltip nzTitle="画面"></i>
+        </button>
+    </div>
+
+    <div class="item">
+        <button class="btn btn-sm btn-primary" (click)="save2()" [disabled]="!edited">
+            <i class="fas fa-save" style="width: 12px" nz-tooltip nzTitle="保存"></i>
+        </button>
+    </div>
+
+    <div class="item">
+        <button class="btn btn-sm btn-primary" (click)="removeSelection()">
+            <i class="fas fa-times" style="width: 12px" nz-tooltip nzTitle="删除"></i>
+        </button>
+    </div>
+</div>

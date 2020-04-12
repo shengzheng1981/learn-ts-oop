@@ -1,0 +1,14 @@
+@import "../../../assets/styles/theme.scss";
+
+.editor-container{
+  display: grid;
+  grid-gap: 10px;
+  grid-auto-flow: column;
+  /* autoprefixer: off;*/
+  grid-auto-columns: min-content;
+}
+
+.btn-primary-active {
+  background-color: #fff;
+  color: $color-primary;
+}

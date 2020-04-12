@@ -27,6 +27,10 @@ const routes: Routes = [
           loadChildren: './chapter5/chapter5.module#Chapter5Module'
         },
         {
+          path: 'chapter6',
+          loadChildren: './chapter6/chapter6.module#Chapter6Module'
+        },
+        {
           path: '**',
           redirectTo: 'chapter1'
         }

@@ -1,0 +1,6 @@
+<div #mapContainer style="height:100%; z-index: 1;">
+
+</div>
+<div class="draw-toolbar">
+    <app-lmap-editor #lmapEditor [editable]="true" [map]="map" (onSave)="onSave($event)" (onCreated)="onCreated($event)" (onDeleted)="onDeleted($event)" (onUpdated)="onUpdated($event)"></app-lmap-editor>
+</div>

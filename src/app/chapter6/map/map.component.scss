@@ -1,0 +1,17 @@
+.draw-toolbar{
+    position: absolute;
+    top: 20px;
+    right: 30px;
+    padding: 10px;
+    background-color: rgba(255, 255, 255, 0.8);
+    z-index: 2;
+    box-shadow: 2px 2px 5px #dddddd;
+    display: grid;
+    /* autoprefixer: off */
+    grid-gap: 10px;
+    grid-auto-flow: column;
+    grid-auto-columns: min-content;
+    border:1px #dddddd solid;
+    border-radius: 3px;
+  }
+  
