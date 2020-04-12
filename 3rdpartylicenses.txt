@@ -203,8 +203,6 @@ ng-zorro-antd/table
 
 ng-zorro-antd/time-picker
 
-ng-zorro-antd/tooltip
-
 reflect-metadata
 Apache-2.0
 Apache License
@@ -264,6 +262,8 @@ If the Work includes a "NOTICE" text file as part of its distribution, then any 
 END OF TERMS AND CONDITIONS
 
 undefined
+
+ng-zorro-antd/tooltip
 
 regenerator-runtime
 MIT
